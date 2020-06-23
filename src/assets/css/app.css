@@ -1,0 +1,391 @@
+:root {
+  --bg: #21252b;
+  --textbg: #282c34;
+  --scrollbar: #4b5362;
+  --border: #181a1f;
+  --textcolor: #e1e1e1;
+  --textstatuscolor: #9fa6b5;
+  --hovercolor: #2f333d;
+  --activecolor: #282c34;
+}
+
+@font-face {
+    font-family: 'OpenSans';
+    font-style: normal;
+    font-weight: 400;
+    src: url('../fonts/OpenSans-Regular.ttf');
+}
+@font-face {
+    font-family: 'OpenSans';
+    font-style: italic;
+    font-weight: 400;
+    src: url('../fonts/OpenSans-Italic.ttf');
+}
+@font-face {
+    font-family: 'OpenSans';
+    font-style: normal;
+    font-weight: 700;
+    src: url('../fonts/OpenSans-Bold.ttf');
+}
+@font-face {
+    font-family: 'OpenSans';
+    font-style: italic;
+    font-weight: 700;
+    src: url('../fonts/OpenSans-BoldItalic.ttf');
+}
+
+body {
+  background-color: var(--bg);
+  color: var(--textcolor);
+  user-select: none;
+  font-family: 'OpenSans';
+  overflow: hidden;
+}
+
+::-webkit-scrollbar {
+  height: 7px;
+  width: 7px;
+}
+
+::-webkit-scrollbar-corner {
+  background: var(--bgcolor);
+}
+
+::-webkit-scrollbar-thumb {
+  border-radius: 5px;
+  border: 3px solid var(--bgcolor);
+  background: var(--scrollbar);
+  background-clip: content-box;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--bgcolor);
+}
+
+asarpath {
+  position:absolute;
+  top:0px;
+  left:0px;
+  width: calc(var(--listwidth) - 40px);
+  height: 30px;
+  padding: 0px 20px;
+  text-align:center;
+  overflow:hidden;
+  white-space: pre;
+  text-overflow: ellipsis;
+  line-height: 2.5em;
+  font-size: 12px;
+  vertical-align: -0.0625em;
+  border-right: 1px solid var(--border);
+}
+
+files-tab {
+  position:absolute;
+  display: block;
+  top: 0px;
+  left: 0px;
+  width: 100%;
+  height: 30px;
+  font-size: 12px;
+  box-shadow: inset 0 -1px 0 var(--border);
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+file-tab {
+  position:relative;
+  display:inline-block;
+  top: 0px;
+  padding: 0px;
+  margin: 0px;
+  -webkit-user-drag: element;
+  line-height: 2.5em;
+  width: 264px;
+  flex: 1 1 0;
+  transition: max-width 0.25s ease-in-out;
+  border-right: 1px solid var(--border);
+  height: 30px;
+  transition-duration: .1s;
+}
+
+file-tab.selected {
+  background-color: var(--textbg);
+}
+
+file-tab.selected:before {
+  content: "";
+  display:block;
+  position: absolute;
+  pointer-events: none;
+  z-index: 2;
+  top: 0px;
+  left: 0px;
+  bottom: 0px;
+  width: 2px;
+  background: #4d78cc;
+}
+
+file-tab.selected:before:focus {
+  background: #568a2f;
+}
+
+file-tab ftitle {
+  text-align: center;
+  margin: 0px 1em;
+  overflow: hidden;
+  white-space: pre;
+  text-overflow: ellipsis;
+  display: block;
+  font-size: 12px;
+}
+
+file-tab ftitle:before {
+  margin-right: .3em;
+  line-height: 1px;
+  vertical-align: -0.0625em;
+}
+
+file-tab close {
+  position: absolute;
+  display: block;
+  top: 6px;
+  right: 6px;
+  width: 18px;
+  height: 18px;
+  border-radius: 3px;
+}
+
+file-tab close:hover {
+  background-color: #4d78cc;
+}
+
+file-tab close::before {
+  position:absolute;
+  top: 5px;
+  right: 5px;
+  z-index: 3;
+  width: 8px;
+  height: 8px;
+  content: "";
+  background-image: url("../icons/close.png");
+  background-size: 8px;
+  background-repeat: no-repeat;
+  transform: scale(0);
+  transition: transform .08s;
+}
+
+file-tab:hover close::before {
+  transform: scale(1);
+  transition-duration: .16s;
+}
+
+file-list {
+  position:absolute;
+  left:0px;
+  top:30px;
+  width: var(--listwidth);
+  height:calc(100% - 60px);
+  border-right: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+  overflow: auto;
+}
+
+resize {
+  position:fixed;
+  left:calc(var(--listwidth) - 2px);
+  top:0px;
+  width: 4px;
+  height: 100%;
+  cursor: col-resize;
+}
+
+list {
+  display: block;
+  position: relative;
+}
+
+header {
+  font-size: 13px;
+  display: block;
+  padding-left: 20px;
+  vertical-align: 6px;
+  white-space: nowrap;
+  height: 30px;
+  color: var(--textscdcolor);
+  line-height: 2em;
+}
+
+directory {
+  display: block;
+  padding-left: 20px;
+}
+
+list directory {
+  padding-left: 17px;
+}
+
+directory.collapsed::before {
+  position: absolute;
+  left:0px;
+  margin: 11px 7px;
+  width: 6px;
+  height: 8px;
+  content: "";
+  background-image: url("../icons/collapsed.png");
+  background-size: 5px;
+  background-repeat: no-repeat;
+}
+
+list directory.collapsed::before {
+  margin-left: 4px;
+}
+
+directory.expanded::before {
+  position:absolute;
+  left:0px;
+  margin: 12px 6px;
+  width: 8px;
+  height: 6px;
+  content: "";
+  background-image: url("../icons/expanded.png");
+  background-size: 7px;
+  background-repeat: no-repeat;
+}
+
+list directory.expanded::before {
+  margin-left: 3px;
+}
+
+directory header::before {
+  position: absolute;
+  left:0px;
+  margin: 9px 10px 9px 20px;
+  width: 14px;
+  height: 12px;
+  content: "";
+  background-image: url("../icons/directory.png");
+  background-size: 13px;
+  background-repeat: no-repeat;
+}
+
+list directory header::before {
+  margin-left: 17px;
+  margin-right: 7px;
+}
+
+file {
+  display: block;
+  padding-left: 20px;
+  width: calc(100%-20px);
+  height: 30px;
+}
+
+list file {
+  padding-left: 17px;
+}
+
+file header::before {
+  position:absolute;
+  left:0px;
+  margin: 7px 10px 9px 20px;
+  width: 12px;
+  height: 14px;
+  content: "";
+  background-image: url("../icons/file.png");
+  background-size: 12px;
+  background-repeat: no-repeat;
+}
+
+list file header::before {
+  margin-left: 17px;
+  margin-right: 7px;
+}
+
+text-edit {
+  position:absolute;
+  right:0px;
+  top:0px;
+  width: calc(100% - var(--listwidth) - 1px);
+  height:calc(100% - 30px);
+  border-bottom: 1px solid var(--border);
+}
+
+text-edit editor {
+  position: absolute;
+  display:block;
+  top: 30px;
+  left: 0px;
+  width: 100%;
+  height: calc(100% - 30px);
+  white-space: pre;
+  background-color: var(--textbg);
+}
+
+text-edit editor line {
+  position:relative;
+  display:block;
+}
+
+text-edit editor line num {
+  display: inline-block;
+  padding-left: .5em;
+  padding-right: 1.6em;
+  text-align: right;
+  width: var(--lw);
+  color: #636d83;
+  font-size: calc(var(--font-size) - 1px);
+}
+
+text-edit editor line text {
+  position: absolute;
+  user-select: text;
+  left: calc(7 + var(--lw) + 22.4);
+}
+
+statusbar {
+  position:absolute;
+  bottom:0px;
+  left:0px;
+  width: 100%;
+  height: 29px;
+  white-space: nowrap;
+  color: var(--textscdcolor);
+}
+
+statusbar left {
+  position:absolute;
+  left:0px;
+  height:100%;
+  width:auto;
+}
+
+statusbar right {
+  position:absolute;
+  right:0;
+  height:100%;
+}
+
+statusbar right div {
+  display: inline-block;
+  position:relative;
+  margin: 0px;
+  padding: 0px .3em;
+  height: 29px;
+  max-width: 20vw;
+  overflow: hidden;
+  font-size: 15px;
+  vertical-align: middle;
+  line-height: 1.65em;
+  white-space: pre;
+  text-overflow: ellipsis;
+}
+
+statusbar right div:hover {
+  text-decoration: none;
+  background-color: var(--hovercolor);
+}
+
+statusbar right div:active {
+  text-decoration: none;
+  background-color: var(--activecolor);
+}

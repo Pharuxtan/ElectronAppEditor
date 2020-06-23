@@ -1,0 +1,40 @@
+{
+  "name": "ElectronAppEditor",
+  "version": "1.0.0",
+  "productName": "ElectronAppEditor",
+  "description": "Edit electron program app.asar without npm",
+  "main": "src/index.html",
+  "scripts": {
+    "start": "nw ."
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Pharuxtan/ElectronAppEditor.git"
+  },
+  "author": "Pharuxtan",
+  "license": "MIT",
+  "window": {
+    "title": "ElectronAppEditor",
+    "icon": "src/assets/icons/program/icon.png",
+    "toolbar": false,
+    "width": 1280,
+    "height": 720
+  },
+  "chromium-args": "--remote-debugging-port=9222",
+  "webkit": {
+    "plugin": true
+  },
+  "dependencies": {
+    "highlight.js": "^10.1.1",
+    "jquery": "^3.5.1",
+    "nw-dialog": "^1.0.7",
+    "path": "^0.12.7"
+  },
+  "devDependencies": {
+    "nw": "^0.46.2-sdk"
+  },
+  "bugs": {
+    "url": "https://github.com/Pharuxtan/ElectronAppEditor/issues"
+  },
+  "homepage": "https://github.com/Pharuxtan/ElectronAppEditor#readme"
+}
