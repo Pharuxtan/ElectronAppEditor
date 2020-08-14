@@ -1,2 +1,2 @@
 # ElectronAppEditor
-WIP
+discontinued
